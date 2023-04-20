@@ -1,0 +1,35 @@
+{
+  "name": "ta-shuo-nest-config",
+  "version": "1.0.0",
+  "description": "nest config",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tashuo/nestjs-config.git"
+  },
+  "keywords": [
+    "nest",
+    "config",
+    "dotenv"
+  ],
+  "author": "ta_shuo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tashuo/nestjs-config/issues"
+  },
+  "homepage": "https://github.com/tashuo/nestjs-config#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "fs": "^0.0.1-security",
+    "glob": "^10.2.1",
+    "lodash": "^4.17.21",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@nestjs/common": "^9.4.0",
+    "@types/node": "^18.15.12"
+  }
+}
