@@ -22,12 +22,7 @@
       "**/*.ts"
     ],
     "exclude": [
-      "./index.ts",
-      "./index.d.ts",
       "node_modules",
-      "./**/*.spec.ts",
-      "examples",
-      "src/__tests__"
     ]
   }
   

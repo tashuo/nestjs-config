@@ -14,7 +14,7 @@ export class ConfigService {
     constructor(@Inject(CONFIG_OPTIONS) private configOptions: ConfigOptions) {
         const configGlob = configOptions.configGlob
         this.loadEnv(configOptions.envGlob)
-
+        this.loadConfig(configOptions.configGlob)
     }
 
     private loadEnv = (envGlob?: string) => {
@@ -44,11 +44,11 @@ export class ConfigService {
         }, {});
     }
 
-    get = (key: string, defaultValue: any = undefined): string | Record<string, any> => {
+    get = (key: string, defaultValue: any = undefined): any => {
         return get(this.configs, key, defaultValue);
     }
 
-    set = (key: string, value: string | Record<string, any>) => {
+    set = (key: string, value: any) => {
         set(this.configs, key, value);
     }
 }
