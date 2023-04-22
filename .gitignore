@@ -4,5 +4,5 @@ yarn-debug.log*
 yarn-error.log*
 node_modules/
 .env
-!src/__tests__/__stubs__/.env
+!test/data/.env
 dist/
