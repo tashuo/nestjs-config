@@ -30,7 +30,6 @@ export class ConfigService {
             const basename = path.basename(file);
             const key = basename.substring(0, basename.lastIndexOf('.'));
             const value = require(file)
-            console.log(value, process.env.APP_NAME);
             configs[key] = value.default || value;
             return configs;
         }, {});
