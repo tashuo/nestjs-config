@@ -12,25 +12,16 @@ export class ConfigService {
     private configs: Record<string, Record<string, any>>;
 
     constructor(@Inject(CONFIG_OPTIONS) private configOptions: ConfigOptions) {
-        const configGlob = configOptions.configGlob
-        this.loadEnv(configOptions.envGlob)
+        this.loadEnv(configOptions.envPath)
         this.loadConfig(configOptions.configGlob)
     }
 
-    private loadEnv = (envGlob?: string) => {
-        if (!isNil(envGlob)) {
-            const envFiles = sync(envGlob);
-            envFiles.forEach((file) => {
-                dotenv.config({path: file})
-            })
-            return
-        }
-
-        const currentEnvFile = path.resolve(process.cwd(), `.env.${process.env.NODE_DEV}`)
-        existsSync(currentEnvFile)
-        && dotenv.config({path: currentEnvFile})
-
-        dotenv.config();
+    private loadEnv = (envPath?: string) => {
+        envPath = envPath ? envPath : path.resolve(process.cwd(), '.env');
+        const currentEnvPath = `${envPath}.${process.env.NODE_DEV}`;
+        existsSync(currentEnvPath) && dotenv.config({path: currentEnvPath});
+// console.log(process.env.NODE_DEV, envPath, currentEnvPath);
+        dotenv.config({path: envPath});
     }
 
     private loadConfig = (configGlob: string) => {
@@ -39,6 +30,7 @@ export class ConfigService {
             const basename = path.basename(file);
             const key = basename.substring(0, basename.lastIndexOf('.'));
             const value = require(file)
+            console.log(value, process.env.APP_NAME);
             configs[key] = value.default || value;
             return configs;
         }, {});
