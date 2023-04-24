@@ -1,7 +1,6 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { CONFIG_OPTIONS } from "./constants";
+import { Injectable } from "@nestjs/common";
 import { ConfigOptions } from "./types";
-import { isNil, get, set } from 'lodash';
+import { get, set } from 'lodash';
 import { sync } from "glob";
 import * as dotenv from 'dotenv';
 import { existsSync } from 'fs';
@@ -11,7 +10,7 @@ import * as path from 'path';
 export class ConfigService {
     private configs: Record<string, Record<string, any>>;
 
-    constructor(@Inject(CONFIG_OPTIONS) private configOptions: ConfigOptions) {
+    constructor(private configOptions: ConfigOptions) {
         this.loadEnv(configOptions.envPath)
         this.loadConfig(configOptions.configGlob)
     }
@@ -20,7 +19,6 @@ export class ConfigService {
         envPath = envPath ? envPath : path.resolve(process.cwd(), '.env');
         const currentEnvPath = `${envPath}.${process.env.NODE_DEV}`;
         existsSync(currentEnvPath) && dotenv.config({path: currentEnvPath});
-// console.log(process.env.NODE_DEV, envPath, currentEnvPath);
         dotenv.config({path: envPath});
     }
 
